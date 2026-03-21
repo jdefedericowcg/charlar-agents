@@ -1,0 +1,50 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+review_model = "gpt-5.4"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+project_doc_fallback_filenames = ["CLAUDE.md"]
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[projects."/home/jaime/personal/charlar"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/admin.charlarapp.com"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/api.charlarapp.com"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/app.charlarapp.com"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/charlarapp.com"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/docs-charlarapp"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/grading-charlarapp"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/shared-charlarapp"]
+trust_level = "trusted"
+
+[projects."/home/jaime/personal/charlar/shared-ui-charlarapp"]
+trust_level = "trusted"
+
+[profiles.charlar-coding]
+model = "gpt-5.3-codex"
+model_reasoning_effort = "high"
+
+[profiles.charlar-fast]
+model = "gpt-5.4-mini"
+model_reasoning_effort = "medium"
+
+[profiles.charlar-deep]
+model = "gpt-5.4"
+model_reasoning_effort = "xhigh"

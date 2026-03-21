@@ -1,0 +1,4 @@
+interface:
+  display_name: "Charlar API"
+  short_description: "Navigate Charlar backend changes"
+  default_prompt: "Use $charlar-api to plan or implement a Charlar backend or shared-contract change safely."

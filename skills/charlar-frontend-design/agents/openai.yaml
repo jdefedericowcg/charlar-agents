@@ -1,0 +1,4 @@
+interface:
+  display_name: "Charlar Frontend Design"
+  short_description: "Design and ship Charlar frontends"
+  default_prompt: "Use $charlar-frontend-design to design or implement a Charlar frontend surface with the shared UI stack."

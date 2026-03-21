@@ -1,0 +1,13 @@
+admin.charlarapp.com/
+api.charlarapp.com/
+app.charlarapp.com/
+charlarapp.com/
+docs-charlarapp/
+grading-charlarapp/
+shared-charlarapp/
+shared-ui-charlarapp/
+
+.DS_Store
+.idea/
+.vscode/
+*.log

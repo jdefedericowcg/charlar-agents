@@ -1,0 +1,4 @@
+interface:
+  display_name: "Charlar Workspace"
+  short_description: "Route work across Charlar repos"
+  default_prompt: "Use $charlar-workspace to choose the right Charlar repo, estimate dependency impact, and plan cross-repo changes."
