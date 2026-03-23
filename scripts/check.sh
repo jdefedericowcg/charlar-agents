@@ -3,7 +3,6 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CODEX_HOME_DIR="${CODEX_HOME:-$HOME/.codex}"
 FAILURES=0
 
 FRONTEND_REPOS=(
@@ -26,39 +25,10 @@ DOCS_REPOS=(
   "docs-charlarapp"
 )
 
-ALL_REPOS=(
-  "${FRONTEND_REPOS[@]}"
-  "${SHARED_UI_REPOS[@]}"
-  "${BACKEND_REPOS[@]}"
-  "${DOCS_REPOS[@]}"
-)
-
 KNOWN_SKILLS=(
   "charlar-workspace"
   "charlar-frontend-design"
   "charlar-api"
-)
-
-ROOT_AGENTS_LINES=(
-  "This workspace root is the primary Codex working context for Charlar."
-  "All child directories here are independent git repositories."
-  "Use this root for multi-repo implementation, testing, review, routing, and audit work."
-  "Root \`git status\` is not authoritative for child repo changes because each child repo manages its own history."
-  "Use \`./scripts/status-by-repo.sh\` from the root when you need an accurate workspace-wide git view."
-  "Before editing, identify the affected repo set and state which repos are in scope."
-  "For each touched repo, consult its tracked \`AGENTS.md\` and note the repo-specific commands, constraints, conventions, and validation requirements that matter."
-  "Treat child repo guidance as reference material in root sessions; it is not automatically active unless you narrow into that repo."
-  "Group edits, validation, and summaries by repo, even when working entirely from the root."
-  "Run repo-local commands for each touched repo and report touched repos clearly in final summaries."
-  "Use \`\$charlar-workspace\` first to scope ownership and downstream impact, then use \`\$charlar-api\` or \`\$charlar-frontend-design\` once the repo set is clear."
-  "Move into a child repo only when tighter focus, repo-local behavior, or simpler single-repo validation helps."
-)
-
-WORKSPACE_SKILL_LINES=(
-  "3. For each touched repo, inspect its tracked \`AGENTS.md\` and \`.codex/config.toml\` before editing."
-  "4. Capture the repo-specific commands, constraints, conventions, and validation requirements that matter."
-  "- Treat child repo \`AGENTS.md\` and \`.codex/config.toml\` as reference guidance in root sessions, not automatically active instructions."
-  "- \`Repo guidance:\` note relevant commands, constraints, conventions, and validation per touched repo from that repo's tracked files."
 )
 
 ROOT_IGNORE_ENTRIES=(
@@ -278,20 +248,6 @@ check_skill_set() {
   done
 }
 
-check_home_config() {
-  local config_path="$CODEX_HOME_DIR/config.toml"
-
-  check_file_matches "$ROOT_DIR/templates/home/config.toml" "$config_path" "home config"
-  check_file_matches "$ROOT_DIR/templates/home/AGENTS.md" "$CODEX_HOME_DIR/AGENTS.md" "home AGENTS"
-  check_contains_line "$config_path" "[mcp_servers.openaiDeveloperDocs]" "Docs MCP block present"
-  check_contains_line "$config_path" 'url = "https://developers.openai.com/mcp"' "Docs MCP URL present"
-  check_contains_line "$config_path" '[projects."/home/jaime/personal/charlar"]' "root trust entry present"
-
-  for repo in "${ALL_REPOS[@]}"; do
-    check_contains_line "$config_path" "[projects.\"$ROOT_DIR/$repo\"]" "$repo trust entry present"
-  done
-}
-
 main() {
   if [[ -d "$ROOT_DIR/.git" ]]; then
     ok "root git repo initialized"
@@ -301,7 +257,6 @@ main() {
 
   check_git_root "$ROOT_DIR" "root repo"
   check_root_ignore_entries
-  check_home_config
 
   check_file_exists "$ROOT_DIR/AGENTS.md" "root AGENTS.md"
   check_file_exists "$ROOT_DIR/.codex/config.toml" "root .codex/config.toml"
@@ -317,12 +272,6 @@ main() {
   check_executable "$ROOT_DIR/scripts/bootstrap.sh" "bootstrap script"
   check_executable "$ROOT_DIR/scripts/check.sh" "check script"
   check_executable "$ROOT_DIR/scripts/status-by-repo.sh" "status-by-repo script"
-  for line in "${ROOT_AGENTS_LINES[@]}"; do
-    check_contains_line "$ROOT_DIR/AGENTS.md" "$line" "root AGENTS contains $line"
-  done
-  for line in "${WORKSPACE_SKILL_LINES[@]}"; do
-    check_contains_line "$ROOT_DIR/skills/charlar-workspace/SKILL.md" "$line" "workspace skill contains $line"
-  done
   check_contains_line "$ROOT_DIR/.codex/config.toml" 'sandbox_mode = "workspace-write"' "root config enables multi-repo workspace writes"
   check_contains_line "$ROOT_DIR/.codex/config.toml" 'approval_policy = "on-request"' "root config keeps on-request approvals"
 

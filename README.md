@@ -15,7 +15,7 @@ This repo is the primary Codex working context for the Charlar workspace.
   - `$charlar-frontend-design`
 - Keeps child repo Codex behavior explicit with tracked `AGENTS.md` and `.codex/config.toml`.
 - Keeps child `.agents/skills/` symlinks local-only and ignored.
-- Syncs machine-local home Codex defaults from tracked templates.
+- Keeps optional home Codex templates available as reference examples.
 
 ## Workspace Layout
 
@@ -60,7 +60,8 @@ Local-only on the machine:
 - `~/.codex/config.toml`
 - `~/.codex/AGENTS.md`
 
-Those home files are synced from tracked templates by `./scripts/bootstrap.sh`.
+Those home files are no longer synced or validated by this repo.
+If you want examples for a machine-local setup, use `templates/home/`.
 
 ## Setup
 
@@ -73,12 +74,11 @@ From `/home/jaime/personal/charlar`:
 
 `./scripts/bootstrap.sh`:
 
-- syncs `~/.codex/config.toml` and `~/.codex/AGENTS.md`
 - syncs tracked child repo `AGENTS.md` and `.codex/config.toml`
 - ensures child `.gitignore` ignores `.agents/`
 - creates or refreshes root and child skill symlinks
 
-`./scripts/check.sh` verifies the tracked-vs-local policy, root guidance, root skill exposure, child repo setup, and helper scripts.
+`./scripts/check.sh` verifies the tracked-vs-local policy, key root config, root skill exposure, child repo setup, and helper scripts.
 
 ## Daily Root-First Workflow
 
