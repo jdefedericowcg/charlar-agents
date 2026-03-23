@@ -12,7 +12,7 @@
 | --- | --- | --- | --- |
 | `app.charlarapp.com` | Learner SPA | `yarn dev`, `yarn build`, `yarn lint`, `yarn check:api-fetch` | Depends on `@charlar/shared`, `@charlar/shared-ui`, `@charlar/grading` |
 | `admin.charlarapp.com` | Admin SPA | `yarn dev`, `yarn build`, `yarn lint`, `yarn check:api-fetch` | Depends on `@charlar/shared`, `@charlar/shared-ui` |
-| `charlarapp.com` | Marketing/support/legal site | `yarn dev`, `yarn build`, `yarn lint`, `yarn sync:plan-pricing` | Depends on `@charlar/shared`, `@charlar/shared-ui` |
+| `charlarapp.com` | Marketing/support/legal site | `yarn dev`, `yarn build`, `yarn lint` | Depends on `@charlar/shared`, `@charlar/shared-ui` |
 | `api.charlarapp.com` | Express API, workers, auth, billing, server domains | `yarn dev`, `yarn build`, `yarn lint`, `yarn test:conversation-facts` | Depends on `@charlar/shared`, `@charlar/grading` |
 | `shared-charlarapp` | Shared schema, contracts, pricing snapshot, utilities | `yarn validate:plan-copy` | Consumed by app, admin, marketing, api, grading |
 | `shared-ui-charlarapp` | Shared UI primitives and styles | `yarn lint`, `yarn typecheck` | Consumed by app, admin, marketing |
