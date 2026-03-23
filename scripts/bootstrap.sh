@@ -3,7 +3,6 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CODEX_HOME_DIR="${CODEX_HOME:-$HOME/.codex}"
 
 FRONTEND_REPOS=(
   "admin.charlarapp.com"
@@ -166,9 +165,6 @@ expose_repo_skills() {
 }
 
 main() {
-  sync_file "$ROOT_DIR/templates/home/config.toml" "$CODEX_HOME_DIR/config.toml"
-  sync_file "$ROOT_DIR/templates/home/AGENTS.md" "$CODEX_HOME_DIR/AGENTS.md"
-
   prune_charlar_skill_set "$ROOT_DIR/.agents/skills" "${ROOT_SKILLS[@]}"
   for skill in "${ROOT_SKILLS[@]}"; do
     sync_symlink "../../skills/$skill" "$ROOT_DIR/.agents/skills/$skill"

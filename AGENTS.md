@@ -2,6 +2,11 @@
 
 This workspace root is the primary Codex working context for Charlar.
 All child directories here are independent git repositories.
+Terminology:
+- `workspace root` means the filesystem directory `/home/jaime/personal/charlar`
+- `root repo` means the git repository at the workspace root, named `charlar-agents`
+- `child repo` means any nested git repository such as `api.charlarapp.com`, `app.charlarapp.com`, `shared-charlarapp`, or `charlarapp.com`
+- Do not use `root` alone when discussing repos, branches, commits, PRs, or ownership; use `workspace root` or `charlar-agents` explicitly
 Use this root for multi-repo implementation, testing, review, routing, and audit work.
 Root `git status` is not authoritative for child repo changes because each child repo manages its own history.
 Use `./scripts/status-by-repo.sh` from the root when you need an accurate workspace-wide git view.
