@@ -7,7 +7,7 @@
 | `shared-charlarapp` | `app`, `admin`, `charlarapp.com`, `api`, `grading` | Shared types, schema, pricing snapshot, feature flags, utilities |
 | `shared-ui-charlarapp` | `app`, `admin`, `charlarapp.com` | Shared component contracts, styles, accessibility, Tailwind usage |
 | `grading-charlarapp` | `app`, `api` | Grading engines, normalization, browser-safe local grading |
-| `api.charlarapp.com/scripts/sync-plan-pricing.mjs` | `app`, `charlarapp.com` build flows | Pricing snapshot sync before frontend builds |
+| `api.charlarapp.com/api/meta/plan-pricing.ts` | `app`, `charlarapp.com` runtime pricing UIs | Live pricing payload for learner and marketing surfaces |
 
 ## High-signal heuristics
 
@@ -39,6 +39,5 @@ cd shared-charlarapp && yarn validate:plan-copy
 
 ## Pricing and contract change notes
 
-- `app.charlarapp.com` runs `node ../api.charlarapp.com/scripts/sync-plan-pricing.mjs` as `prebuild`.
-- `charlarapp.com` exposes the same sync via `yarn sync:plan-pricing`.
-- Treat shared pricing data as a cross-repo change even if the initial edit lands in one repo.
+- `app.charlarapp.com` and `charlarapp.com` fetch runtime pricing from `/meta/plan-pricing`.
+- Treat shared pricing data as a cross-repo change even if the initial edit lands in one repo, because the API contract and both frontends move together.

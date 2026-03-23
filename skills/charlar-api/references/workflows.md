@@ -2,11 +2,10 @@
 
 ## Pricing sync
 
-- `api.charlarapp.com/scripts/sync-plan-pricing.mjs` is the cross-repo sync entrypoint.
-- `app.charlarapp.com` runs that script as `prebuild`.
-- `charlarapp.com` exposes the same behavior via `yarn sync:plan-pricing`.
-- `shared-charlarapp` owns shared plan/pricing metadata and exposes `yarn validate:plan-copy`.
-- Treat pricing changes as cross-repo work even if the initial edit lands in one repo.
+- `api.charlarapp.com/api/meta/plan-pricing.ts` is the runtime source for public pricing payloads.
+- `app.charlarapp.com` and `charlarapp.com` fetch live pricing from `/meta/plan-pricing` at runtime.
+- `shared-charlarapp` owns shared plan/pricing types, formatting helpers, and schema metadata.
+- Treat pricing changes as cross-repo work even if the initial edit lands in one repo, because public UI surfaces now depend on the runtime API contract.
 
 ## Verification commands
 
